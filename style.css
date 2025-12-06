@@ -199,9 +199,72 @@ main {
     color: #383d41;
 }
 
+.tip-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.tip-content {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.compare-section {
+    padding: 20px;
+}
+
+.compare-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--text-primary);
+}
+
+.compare-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.compare-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background: var(--bg-color);
+    border-radius: 10px;
+    font-size: 0.95rem;
+}
+
+.compare-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    flex: 1;
+}
+
+.compare-temp {
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0 15px;
+}
+
+.compare-status {
+    font-size: 0.85rem;
+    padding: 4px 10px;
+    border-radius: 8px;
+    background: #e9ecef;
+    color: var(--text-secondary);
+}
+
 .share-section {
     text-align: center;
     margin: 30px 0;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .share-btn {
@@ -215,6 +278,14 @@ main {
     cursor: pointer;
     box-shadow: var(--shadow);
     transition: all 0.3s ease;
+    flex: 1;
+    min-width: 150px;
+    max-width: 200px;
+}
+
+.share-btn.secondary {
+    background: var(--primary-color);
+    color: white;
 }
 
 .share-btn:hover {
@@ -323,6 +394,24 @@ footer p {
     
     .main-card {
         padding: 30px 20px;
+    }
+    
+    .tip-content {
+        font-size: 1rem;
+    }
+    
+    .share-section {
+        flex-direction: column;
+    }
+    
+    .share-btn {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .compare-item {
+        font-size: 0.9rem;
+        padding: 10px 12px;
     }
 }
 

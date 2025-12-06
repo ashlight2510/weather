@@ -1,98 +1,159 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="지금날씨 - 실시간 날씨, 미세먼지, 초미세먼지, 체감온도, 자외선 정보를 한눈에 확인하세요">
-    <meta name="keywords" content="날씨, 미세먼지, 초미세먼지, 날씨예보, 실시간날씨, 체감온도, 자외선">
-    <meta name="author" content="AshLight">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yourusername.github.io/weather/">
-    <meta property="og:title" content="지금날씨 - 실시간 날씨 정보">
-    <meta property="og:description" content="실시간 날씨, 미세먼지, 초미세먼지, 체감온도, 자외선 정보를 한눈에 확인하세요">
-    <meta property="og:image" content="https://yourusername.github.io/weather/og-image.png">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://yourusername.github.io/weather/">
-    <meta property="twitter:title" content="지금날씨 - 실시간 날씨 정보">
-    <meta property="twitter:description" content="실시간 날씨, 미세먼지, 초미세먼지, 체감온도, 자외선 정보를 한눈에 확인하세요">
-    <meta property="twitter:image" content="https://yourusername.github.io/weather/og-image.png">
-    
-    <title>지금날씨 - 실시간 날씨 정보</title>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1 class="title">지금날씨</h1>
-            <div class="location-info">
-                <span id="location">위치 확인 중...</span>
-                <button id="refresh-btn" class="refresh-btn" aria-label="새로고침">🔄</button>
-            </div>
-        </header>
-        
-        <main>
-            <div class="weather-card main-card">
-                <div class="temperature-section">
-                    <div class="temp-main" id="temperature">--</div>
-                    <div class="temp-unit">°C</div>
-                </div>
-                <div class="weather-icon" id="weather-icon">☀️</div>
-                <div class="weather-desc" id="weather-desc">--</div>
-            </div>
-            
-            <div class="info-grid">
-                <div class="weather-card info-card">
-                    <div class="info-label">체감온도</div>
-                    <div class="info-value" id="feels-like">--°C</div>
-                </div>
-                
-                <div class="weather-card info-card">
-                    <div class="info-label">미세먼지</div>
-                    <div class="info-value" id="pm10">
-                        <span class="value">--</span>
-                        <span class="unit">µg/m³</span>
-                    </div>
-                    <div class="info-status" id="pm10-status">--</div>
-                </div>
-                
-                <div class="weather-card info-card">
-                    <div class="info-label">초미세먼지</div>
-                    <div class="info-value" id="pm25">
-                        <span class="value">--</span>
-                        <span class="unit">µg/m³</span>
-                    </div>
-                    <div class="info-status" id="pm25-status">--</div>
-                </div>
-                
-                <div class="weather-card info-card">
-                    <div class="info-label">자외선</div>
-                    <div class="info-value" id="uv-index">--</div>
-                    <div class="info-status" id="uv-status">--</div>
-                </div>
-            </div>
-        </main>
-        
-        <div class="share-section">
-            <button id="share-btn" class="share-btn">공유하기 📤</button>
-        </div>
-        
-        <footer>
-            <p>© 2025 <a href="mailto:ashlight2510@gmail.com" class="footer-link">AshLight</a>. All rights reserved.</p>
-        </footer>
-    </div>
-    
-    <div id="loading" class="loading">
-        <div class="spinner"></div>
-        <p>날씨 정보를 불러오는 중...</p>
-    </div>
-    
-    <script src="script.js"></script>
-</body>
-</html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="지금날씨 - 실시간 날씨, 미세먼지, 초미세먼지, 체감온도, 자외선 정보를 한눈에 확인하세요"
+    />
+    <meta
+      name="keywords"
+      content="날씨, 미세먼지, 초미세먼지, 날씨예보, 실시간날씨, 체감온도, 자외선"
+    />
+    <meta name="author" content="AshLight" />
 
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yourusername.github.io/weather/" />
+    <meta property="og:title" content="지금날씨 - 실시간 날씨 정보" />
+    <meta
+      property="og:description"
+      content="실시간 날씨, 미세먼지, 초미세먼지, 체감온도, 자외선 정보를 한눈에 확인하세요"
+    />
+    <meta
+      property="og:image"
+      content="https://yourusername.github.io/weather/og-image.png"
+    />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta
+      property="twitter:url"
+      content="https://yourusername.github.io/weather/"
+    />
+    <meta property="twitter:title" content="지금날씨 - 실시간 날씨 정보" />
+    <meta
+      property="twitter:description"
+      content="실시간 날씨, 미세먼지, 초미세먼지, 체감온도, 자외선 정보를 한눈에 확인하세요"
+    />
+    <meta
+      property="twitter:image"
+      content="https://yourusername.github.io/weather/og-image.png"
+    />
+
+    <title>지금날씨 - 실시간 날씨 정보</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1 class="title">지금날씨</h1>
+        <div class="location-info">
+          <span id="location">위치 확인 중...</span>
+          <button id="refresh-btn" class="refresh-btn" aria-label="새로고침">
+            🔄
+          </button>
+        </div>
+      </header>
+
+      <main>
+        <div class="weather-card main-card">
+          <div class="temperature-section">
+            <div class="temp-main" id="temperature">--</div>
+            <div class="temp-unit">°C</div>
+          </div>
+          <div class="weather-icon" id="weather-icon">☀️</div>
+          <div class="weather-desc" id="weather-desc">--</div>
+        </div>
+
+        <div class="info-grid">
+          <div class="weather-card info-card">
+            <div class="info-label">체감온도</div>
+            <div class="info-value" id="feels-like">--°C</div>
+          </div>
+
+          <div class="weather-card info-card">
+            <div class="info-label">미세먼지</div>
+            <div class="info-value" id="pm10">
+              <span class="value">--</span>
+              <span class="unit">µg/m³</span>
+            </div>
+            <div class="info-status" id="pm10-status">--</div>
+          </div>
+
+          <div class="weather-card info-card">
+            <div class="info-label">초미세먼지</div>
+            <div class="info-value" id="pm25">
+              <span class="value">--</span>
+              <span class="unit">µg/m³</span>
+            </div>
+            <div class="info-status" id="pm25-status">--</div>
+          </div>
+
+          <div class="weather-card info-card">
+            <div class="info-label">자외선</div>
+            <div class="info-value" id="uv-index">--</div>
+            <div class="info-status" id="uv-status">--</div>
+          </div>
+        </div>
+
+        <!-- 외출 지수 요약 -->
+        <div class="weather-card tip-card" id="tip-card" style="display: none">
+          <div class="tip-content" id="tip-content">--</div>
+        </div>
+
+        <!-- 이웃 동네 비교 -->
+        <div
+          class="weather-card compare-section"
+          id="compare-section"
+          style="display: none"
+        >
+          <div class="compare-title">📍 주변 비교</div>
+          <div class="compare-list" id="compare-list"></div>
+        </div>
+      </main>
+
+      <div class="share-section">
+        <button id="share-btn" class="share-btn">공유하기 📤</button>
+        <button id="share-image-btn" class="share-btn secondary">
+          이미지로 공유 🖼️
+        </button>
+      </div>
+
+      <!-- 이미지 생성용 숨김 캔버스 -->
+      <canvas id="share-canvas" style="display: none"></canvas>
+
+      <ins
+        class="kakao_ad_area"
+        style="display: none"
+        data-ad-unit="DAN-tzbpyImi5HFN8s9m"
+        data-ad-width="250"
+        data-ad-height="250"
+      ></ins>
+      <script
+        type="text/javascript"
+        src="//t1.daumcdn.net/kas/static/ba.min.js"
+        async
+      ></script>
+
+      <footer>
+        <p>
+          © 2025
+          <a href="mailto:ashlight2510@gmail.com" class="footer-link"
+            >AshLight</a
+          >. All rights reserved.
+        </p>
+      </footer>
+    </div>
+
+    <div id="loading" class="loading">
+      <div class="spinner"></div>
+      <p>날씨 정보를 불러오는 중...</p>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
