@@ -182,7 +182,7 @@
     <script>
       (function () {
         "use strict";
-        const targetUrl = "https://weather.funnyfunny.cloud/";
+        const targetUrl = "https://funnyfunny.cloud/";
         function addMoreTestsButton() {
           if (document.getElementById("more-tests-btn")) return;
           const moreBtn = document.createElement("button");
@@ -190,8 +190,7 @@
           moreBtn.type = "button";
           moreBtn.dataset.url = targetUrl;
           moreBtn.textContent = "더 많은 테스트 해보기";
-          moreBtn.className =
-            "w-full py-4 bg-white border border-purple-100 text-purple-700 font-semibold rounded-xl hover:bg-purple-50 hover:border-purple-200 transition-all duration-200 mt-3";
+          moreBtn.className = "more-tests-btn";
           moreBtn.addEventListener("click", function () {
             window.open(targetUrl, "_blank", "noopener");
           });

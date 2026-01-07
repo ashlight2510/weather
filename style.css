@@ -297,6 +297,38 @@ main {
     transform: translateY(0);
 }
 
+.more-tests-btn {
+    background: linear-gradient(135deg, #50e3c2 0%, #4a90e2 100%);
+    border: none;
+    border-radius: 999px;
+    padding: 16px 44px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #ffffff;
+    cursor: pointer;
+    box-shadow: 0 10px 22px rgba(74, 144, 226, 0.28);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+    flex: 1;
+    min-width: 220px;
+    max-width: 420px;
+}
+
+.more-tests-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(74, 144, 226, 0.35);
+    filter: brightness(1.03);
+}
+
+.more-tests-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 8px 18px rgba(74, 144, 226, 0.26);
+}
+
+.more-tests-btn:focus-visible {
+    outline: 3px solid rgba(80, 227, 194, 0.45);
+    outline-offset: 3px;
+}
+
 footer {
     text-align: center;
     padding: 30px 0;
@@ -408,6 +440,11 @@ footer p {
         width: 100%;
         max-width: 100%;
     }
+
+    .more-tests-btn {
+        width: 100%;
+        max-width: 100%;
+    }
     
     .compare-item {
         font-size: 0.9rem;
@@ -424,4 +461,3 @@ footer p {
         font-size: 3.5rem;
     }
 }
-
