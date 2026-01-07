@@ -28,10 +28,7 @@
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta
-      property="twitter:url"
-      content="https://weather.funnyfunny.cloud/"
-    />
+    <meta property="twitter:url" content="https://weather.funnyfunny.cloud/" />
     <meta property="twitter:title" content="지금날씨 - 실시간 날씨 정보" />
     <meta
       property="twitter:description"
@@ -43,16 +40,27 @@
     />
 
     <title>지금날씨 - 실시간 날씨 정보</title>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%E2%98%80%EF%B8%8F%3C/text%3E%3C/svg%3E" />
-    <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%E2%98%80%EF%B8%8F%3C/text%3E%3C/svg%3E" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%E2%98%80%EF%B8%8F%3C/text%3E%3C/svg%3E"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%E2%98%80%EF%B8%8F%3C/text%3E%3C/svg%3E"
+    />
     <link rel="stylesheet" href="style.css" />
-      <meta property="og:image:alt" content="Live Weather Now" />
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1204894220949193"
-     crossorigin="anonymous"></script>
+    <meta property="og:image:alt" content="Live Weather Now" />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1204894220949193"
+      crossorigin="anonymous"
+    ></script>
     <!-- responsive-base -->
     <style>
       /* responsive-base */
-      *, *::before, *::after {
+      *,
+      *::before,
+      *::after {
         box-sizing: border-box;
       }
       html {
@@ -74,8 +82,9 @@
         word-break: break-word;
       }
     </style>
-</head>
-  <body><div class="container">
+  </head>
+  <body>
+    <div class="container">
       <header>
         <h1 class="title">지금날씨</h1>
         <div class="location-info">
@@ -169,48 +178,50 @@
     </div>
 
     <script src="script.js"></script>
-  
-    
+
     <script>
       (function () {
-        'use strict';
-        const targetUrl = 'https://weather.funnyfunny.cloud/';
+        "use strict";
+        const targetUrl = "https://weather.funnyfunny.cloud/";
         function addMoreTestsButton() {
-          if (document.getElementById('more-tests-btn')) return;
-          const moreBtn = document.createElement('button');
-          moreBtn.id = 'more-tests-btn';
-          moreBtn.type = 'button';
+          if (document.getElementById("more-tests-btn")) return;
+          const moreBtn = document.createElement("button");
+          moreBtn.id = "more-tests-btn";
+          moreBtn.type = "button";
           moreBtn.dataset.url = targetUrl;
-          moreBtn.textContent = '더 많은 테스트 해보기';
-          moreBtn.className = 'w-full py-4 bg-white border border-purple-100 text-purple-700 font-semibold rounded-xl hover:bg-purple-50 hover:border-purple-200 transition-all duration-200 mt-3';
-          moreBtn.addEventListener('click', function () {
-            window.open(targetUrl, '_blank', 'noopener');
+          moreBtn.textContent = "더 많은 테스트 해보기";
+          moreBtn.className =
+            "w-full py-4 bg-white border border-purple-100 text-purple-700 font-semibold rounded-xl hover:bg-purple-50 hover:border-purple-200 transition-all duration-200 mt-3";
+          moreBtn.addEventListener("click", function () {
+            window.open(targetUrl, "_blank", "noopener");
           });
-          const shareButton = document.querySelector("button#share-btn, button#shareBtn, button[id*=\"share\"]");
+          const shareButton = document.querySelector(
+            'button#share-btn, button#shareBtn, button[id*="share"]'
+          );
           if (shareButton) {
-            shareButton.insertAdjacentElement('afterend', moreBtn);
+            shareButton.insertAdjacentElement("afterend", moreBtn);
           } else if (document.body) {
             document.body.appendChild(moreBtn);
           }
         }
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', addMoreTestsButton);
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", addMoreTestsButton);
         } else {
           addMoreTestsButton();
         }
       })();
     </script>
 
-
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-1204894220949193"
-     data-ad-slot="5145068706"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-    
-</body>
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-1204894220949193"
+      data-ad-slot="5145068706"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </body>
 </html>
