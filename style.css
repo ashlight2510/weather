@@ -271,7 +271,7 @@ main {
     background: white;
     border: none;
     border-radius: 50px;
-    padding: 15px 40px;
+    padding: 10px 44px;
     font-size: 1.1rem;
     font-weight: 600;
     color: var(--primary-color);
@@ -279,8 +279,8 @@ main {
     box-shadow: var(--shadow);
     transition: all 0.3s ease;
     flex: 1;
-    min-width: 150px;
-    max-width: 200px;
+    min-width: 200px;
+    max-width: 260px;
 }
 
 .share-btn.secondary {
@@ -308,9 +308,9 @@ main {
     cursor: pointer;
     box-shadow: 0 10px 22px rgba(74, 144, 226, 0.28);
     transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
-    flex: 1;
-    min-width: 220px;
-    max-width: 420px;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 16px;
 }
 
 .more-tests-btn:hover {

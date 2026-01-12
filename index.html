@@ -206,11 +206,9 @@
           moreBtn.addEventListener("click", function () {
             window.open(targetUrl, "_blank", "noopener");
           });
-          const shareButton = document.querySelector(
-            'button#share-btn, button#shareBtn, button[id*="share"]'
-          );
-          if (shareButton) {
-            shareButton.insertAdjacentElement("afterend", moreBtn);
+          const shareSection = document.querySelector(".share-section");
+          if (shareSection) {
+            shareSection.insertAdjacentElement("afterend", moreBtn);
           } else if (document.body) {
             document.body.appendChild(moreBtn);
           }
