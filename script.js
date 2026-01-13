@@ -2,6 +2,270 @@
 const WEATHER_API_URL = 'https://api.open-meteo.com/v1/forecast';
 const AIR_QUALITY_API_URL = 'https://air-quality-api.open-meteo.com/v1/air-quality';
 
+const translations = {
+    ko: {
+        metaTitle: '지금날씨 - 실시간 날씨 정보',
+        metaDescription: '지금날씨 - 실시간 날씨, 미세먼지, 초미세먼지, 체감온도, 자외선 정보를 한눈에 확인하세요',
+        metaOgTitle: '지금날씨 - 실시간 날씨 정보',
+        metaOgDescription: '실시간 날씨, 미세먼지, 초미세먼지, 체감온도, 자외선 정보를 한눈에 확인하세요',
+        metaTwitterTitle: '지금날씨 - 실시간 날씨 정보',
+        metaTwitterDescription: '실시간 날씨, 미세먼지, 초미세먼지, 체감온도, 자외선 정보를 한눈에 확인하세요',
+        title: '지금날씨',
+        refreshAria: '새로고침',
+        labelFeelsLike: '체감온도',
+        labelPm10: '미세먼지',
+        labelPm25: '초미세먼지',
+        labelUv: '자외선',
+        compareTitle: '📍 주변 비교',
+        btnShare: '공유하기 📤',
+        btnShareImage: '이미지로 공유 🖼️',
+        footerRights: '. All rights reserved.',
+        loadingText: '날씨 정보를 불러오는 중...',
+        locationLoading: '위치 확인 중...',
+        noData: '데이터 없음',
+        statusGood: '좋음',
+        statusModerate: '보통',
+        statusBad: '나쁨',
+        statusVeryBad: '매우나쁨',
+        uvLow: '낮음',
+        uvModerate: '보통',
+        uvHigh: '높음',
+        uvVeryHigh: '매우높음',
+        uvExtreme: '위험',
+        tipMask: '😷 마스크 권장 (초미세먼지 높음)',
+        tipCoat: '🧣 겉옷 필수!',
+        tipScarf: '🌬️ 목도리 챙기면 좋아요',
+        tipSunscreenHigh: '🧴 자외선 강함 – 선크림 필수',
+        tipSunscreenLow: '🧴 자외선 낮음 – 편한 외출 가능',
+        tipDrink: '🥤 시원한 음료 챙기세요',
+        tipGood: '☀️ 좋은 날씨예요!',
+        alertFetchFail: '날씨 정보를 불러올 수 없습니다. 위치 권한을 확인해주세요.',
+        shareTitle: '지금날씨',
+        shareText: '지금날씨 🌤️\n\n{location}\n온도: {temp}°C ({desc})\n미세먼지: {pm10}\n초미세먼지: {pm25}\n\n#지금날씨',
+        shareCopied: '클립보드에 복사되었습니다!',
+        sharePrompt: '아래 텍스트를 복사하세요:',
+        shareNeedData: '날씨 데이터를 먼저 불러와주세요.',
+        imageCreateFail: '이미지 생성에 실패했습니다.',
+        imageDownloaded: '이미지가 다운로드되었습니다!',
+        moreTests: '더 많은 테스트 해보기',
+        feelsLikeShort: '체감',
+        pm10Short: '미세',
+        pm25Short: '초미세',
+        uvShort: 'UV',
+        shareImageTitle: '지금날씨',
+        shareImageText: '{location} 날씨 정보',
+        downloadFileName: '지금날씨.png'
+    },
+    en: {
+        metaTitle: 'Live Weather Now',
+        metaDescription: 'Check real-time weather, PM10/PM2.5, feels-like temperature, and UV index at a glance.',
+        metaOgTitle: 'Live Weather Now',
+        metaOgDescription: 'Check real-time weather, PM10/PM2.5, feels-like temperature, and UV index at a glance.',
+        metaTwitterTitle: 'Live Weather Now',
+        metaTwitterDescription: 'Check real-time weather, PM10/PM2.5, feels-like temperature, and UV index at a glance.',
+        title: 'Live Weather Now',
+        refreshAria: 'Refresh',
+        labelFeelsLike: 'Feels like',
+        labelPm10: 'PM10',
+        labelPm25: 'PM2.5',
+        labelUv: 'UV Index',
+        compareTitle: '📍 Nearby comparison',
+        btnShare: 'Share 📤',
+        btnShareImage: 'Share image 🖼️',
+        footerRights: '. All rights reserved.',
+        loadingText: 'Loading weather information...',
+        locationLoading: 'Detecting location...',
+        noData: 'No data',
+        statusGood: 'Good',
+        statusModerate: 'Moderate',
+        statusBad: 'Bad',
+        statusVeryBad: 'Very bad',
+        uvLow: 'Low',
+        uvModerate: 'Moderate',
+        uvHigh: 'High',
+        uvVeryHigh: 'Very high',
+        uvExtreme: 'Extreme',
+        tipMask: '😷 Mask recommended (PM2.5 is high)',
+        tipCoat: '🧣 Wear a coat!',
+        tipScarf: '🌬️ A scarf is a good idea',
+        tipSunscreenHigh: '🧴 Strong UV – sunscreen required',
+        tipSunscreenLow: '🧴 Low UV – easy outing',
+        tipDrink: '🥤 Bring a cool drink',
+        tipGood: '☀️ Great weather!',
+        alertFetchFail: 'Unable to load weather. Check location permissions.',
+        shareTitle: 'Live Weather Now',
+        shareText: 'Live Weather Now 🌤️\n\n{location}\nTemp: {temp}°C ({desc})\nPM10: {pm10}\nPM2.5: {pm25}\n\n#LiveWeather',
+        shareCopied: 'Copied to clipboard!',
+        sharePrompt: 'Copy the text below:',
+        shareNeedData: 'Load weather data first.',
+        imageCreateFail: 'Failed to generate image.',
+        imageDownloaded: 'Image downloaded!',
+        moreTests: 'See more tests',
+        feelsLikeShort: 'Feels',
+        pm10Short: 'PM10',
+        pm25Short: 'PM2.5',
+        uvShort: 'UV',
+        shareImageTitle: 'Live Weather Now',
+        shareImageText: '{location} weather info',
+        downloadFileName: 'live-weather.png'
+    }
+};
+
+const weatherDescriptions = {
+    ko: {
+        0: '맑음',
+        1: '대체로 맑음',
+        2: '부분적으로 흐림',
+        3: '흐림',
+        45: '안개',
+        48: '서리 안개',
+        51: '약한 이슬비',
+        53: '적당한 이슬비',
+        55: '강한 이슬비',
+        56: '약한 진눈깨비',
+        57: '강한 진눈깨비',
+        61: '약한 비',
+        63: '적당한 비',
+        65: '강한 비',
+        66: '약한 얼음비',
+        67: '강한 얼음비',
+        71: '약한 눈',
+        73: '적당한 눈',
+        75: '강한 눈',
+        77: '눈송이',
+        80: '약한 소나기',
+        81: '적당한 소나기',
+        82: '강한 소나기',
+        85: '약한 눈 소나기',
+        86: '강한 눈 소나기',
+        95: '천둥번개',
+        96: '우박과 천둥번개',
+        99: '강한 우박과 천둥번개'
+    },
+    en: {
+        0: 'Clear',
+        1: 'Mostly clear',
+        2: 'Partly cloudy',
+        3: 'Cloudy',
+        45: 'Fog',
+        48: 'Rime fog',
+        51: 'Light drizzle',
+        53: 'Moderate drizzle',
+        55: 'Heavy drizzle',
+        56: 'Light sleet',
+        57: 'Heavy sleet',
+        61: 'Light rain',
+        63: 'Moderate rain',
+        65: 'Heavy rain',
+        66: 'Light freezing rain',
+        67: 'Heavy freezing rain',
+        71: 'Light snow',
+        73: 'Moderate snow',
+        75: 'Heavy snow',
+        77: 'Snow grains',
+        80: 'Light showers',
+        81: 'Moderate showers',
+        82: 'Heavy showers',
+        85: 'Light snow showers',
+        86: 'Heavy snow showers',
+        95: 'Thunderstorm',
+        96: 'Thunderstorm with hail',
+        99: 'Severe thunderstorm with hail'
+    }
+};
+
+let currentLang = 'ko';
+
+function t(key, vars = {}) {
+    const table = translations[currentLang] || translations.ko;
+    const template = table[key] ?? translations.ko[key] ?? key;
+    return template.replace(/\{(\w+)\}/g, (_, token) =>
+        vars[token] !== undefined ? vars[token] : `{${token}}`
+    );
+}
+
+function applyTranslations() {
+    document.title = t('metaTitle');
+    const desc = document.querySelector('meta[name="description"]');
+    if (desc) desc.setAttribute('content', t('metaDescription'));
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute('content', t('metaOgTitle'));
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) ogDesc.setAttribute('content', t('metaOgDescription'));
+    const twitterTitle = document.querySelector('meta[property="twitter:title"]');
+    if (twitterTitle) twitterTitle.setAttribute('content', t('metaTwitterTitle'));
+    const twitterDesc = document.querySelector('meta[property="twitter:description"]');
+    if (twitterDesc) twitterDesc.setAttribute('content', t('metaTwitterDescription'));
+
+    document.querySelectorAll('[data-i18n]').forEach((el) => {
+        el.textContent = t(el.dataset.i18n);
+    });
+    document.querySelectorAll('[data-i18n-aria]').forEach((el) => {
+        el.setAttribute('aria-label', t(el.dataset.i18nAria));
+    });
+}
+
+function setLang(lang, options = {}) {
+    const nextLang = translations[lang] ? lang : 'ko';
+    currentLang = nextLang;
+    document.documentElement.lang = nextLang;
+    localStorage.setItem('preferredLang', nextLang);
+    document.querySelectorAll('.lang-switch button').forEach((button) => {
+        button.classList.toggle('active', button.dataset.lang === nextLang);
+    });
+    applyTranslations();
+    updateMoreTestsButton();
+    if (!currentLocationName && elements.location) {
+        elements.location.textContent = t('locationLoading');
+    }
+    if (currentWeatherData && currentLocation) {
+        displayWeatherData(
+            currentWeatherData,
+            currentAirQualityData,
+            currentLocationNameRaw,
+            currentLocation.lat,
+            currentLocation.lon
+        );
+    }
+
+    if (options.updateUrl) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('lang', nextLang);
+        window.history.replaceState({}, '', url);
+    }
+}
+
+function detectLang() {
+    const params = new URLSearchParams(window.location.search);
+    const paramLang = params.get('lang');
+    if (translations[paramLang]) return paramLang;
+    const stored = localStorage.getItem('preferredLang');
+    if (translations[stored]) return stored;
+    const browser = navigator.language?.toLowerCase() || '';
+    return browser.startsWith('en') ? 'en' : 'ko';
+}
+
+function initLanguage() {
+    document.querySelectorAll('.lang-switch button').forEach((button) => {
+        button.addEventListener('click', () => {
+            setLang(button.dataset.lang, { updateUrl: true });
+        });
+    });
+    setLang(detectLang(), { updateUrl: false });
+}
+
+function updateMoreTestsButton() {
+    const moreBtn = document.getElementById('more-tests-btn');
+    if (moreBtn) {
+        moreBtn.textContent = t('moreTests');
+    }
+}
+
+window.weatherI18n = {
+    t,
+    setLang
+};
+
 // DOM 요소
 const elements = {
     location: document.getElementById('location'),
@@ -31,52 +295,65 @@ let currentLocation = null;
 let currentWeatherData = null;
 let currentAirQualityData = null;
 let currentLocationName = null;
+let currentLocationNameRaw = null;
 
 // 주요 도시 좌표 (fallback 및 비교용)
 const majorCities = {
-    '서울': { lat: 37.5665, lon: 126.9780, name: '서울' },
-    '강남': { lat: 37.4979, lon: 127.0276, name: '강남' },
-    '홍대': { lat: 37.5563, lon: 126.9233, name: '홍대' },
-    '잠실': { lat: 37.5133, lon: 127.1028, name: '잠실' },
-    '인천': { lat: 37.4563, lon: 126.7052, name: '인천' },
-    '부산': { lat: 35.1796, lon: 129.0756, name: '부산' },
-    '대구': { lat: 35.8714, lon: 128.6014, name: '대구' }
+    '서울': { lat: 37.5665, lon: 126.9780, name: '서울', nameEn: 'Seoul' },
+    '강남': { lat: 37.4979, lon: 127.0276, name: '강남', nameEn: 'Gangnam' },
+    '홍대': { lat: 37.5563, lon: 126.9233, name: '홍대', nameEn: 'Hongdae' },
+    '잠실': { lat: 37.5133, lon: 127.1028, name: '잠실', nameEn: 'Jamsil' },
+    '인천': { lat: 37.4563, lon: 126.7052, name: '인천', nameEn: 'Incheon' },
+    '부산': { lat: 35.1796, lon: 129.0756, name: '부산', nameEn: 'Busan' },
+    '대구': { lat: 35.8714, lon: 128.6014, name: '대구', nameEn: 'Daegu' }
 };
+
+function getLocalizedCityName(name) {
+    if (!name) return name;
+    const city = majorCities[name];
+    if (city) {
+        return currentLang === 'en' ? city.nameEn : city.name;
+    }
+    return name;
+}
 
 // WMO Weather Code를 날씨 설명과 아이콘으로 변환
 function getWeatherFromCode(code) {
+    const descMap = weatherDescriptions[currentLang] || weatherDescriptions.ko;
     const weatherMap = {
-        0: { icon: '☀️', desc: '맑음' },
-        1: { icon: '🌤️', desc: '대체로 맑음' },
-        2: { icon: '⛅', desc: '부분적으로 흐림' },
-        3: { icon: '☁️', desc: '흐림' },
-        45: { icon: '🌫️', desc: '안개' },
-        48: { icon: '🌫️', desc: '서리 안개' },
-        51: { icon: '🌦️', desc: '약한 이슬비' },
-        53: { icon: '🌦️', desc: '적당한 이슬비' },
-        55: { icon: '🌦️', desc: '강한 이슬비' },
-        56: { icon: '🌨️', desc: '약한 진눈깨비' },
-        57: { icon: '🌨️', desc: '강한 진눈깨비' },
-        61: { icon: '🌧️', desc: '약한 비' },
-        63: { icon: '🌧️', desc: '적당한 비' },
-        65: { icon: '🌧️', desc: '강한 비' },
-        66: { icon: '🌨️', desc: '약한 얼음비' },
-        67: { icon: '🌨️', desc: '강한 얼음비' },
-        71: { icon: '❄️', desc: '약한 눈' },
-        73: { icon: '❄️', desc: '적당한 눈' },
-        75: { icon: '❄️', desc: '강한 눈' },
-        77: { icon: '❄️', desc: '눈송이' },
-        80: { icon: '🌦️', desc: '약한 소나기' },
-        81: { icon: '🌦️', desc: '적당한 소나기' },
-        82: { icon: '🌦️', desc: '강한 소나기' },
-        85: { icon: '🌨️', desc: '약한 눈 소나기' },
-        86: { icon: '🌨️', desc: '강한 눈 소나기' },
-        95: { icon: '⛈️', desc: '천둥번개' },
-        96: { icon: '⛈️', desc: '우박과 천둥번개' },
-        99: { icon: '⛈️', desc: '강한 우박과 천둥번개' }
+        0: { icon: '☀️' },
+        1: { icon: '🌤️' },
+        2: { icon: '⛅' },
+        3: { icon: '☁️' },
+        45: { icon: '🌫️' },
+        48: { icon: '🌫️' },
+        51: { icon: '🌦️' },
+        53: { icon: '🌦️' },
+        55: { icon: '🌦️' },
+        56: { icon: '🌨️' },
+        57: { icon: '🌨️' },
+        61: { icon: '🌧️' },
+        63: { icon: '🌧️' },
+        65: { icon: '🌧️' },
+        66: { icon: '🌨️' },
+        67: { icon: '🌨️' },
+        71: { icon: '❄️' },
+        73: { icon: '❄️' },
+        75: { icon: '❄️' },
+        77: { icon: '❄️' },
+        80: { icon: '🌦️' },
+        81: { icon: '🌦️' },
+        82: { icon: '🌦️' },
+        85: { icon: '🌨️' },
+        86: { icon: '🌨️' },
+        95: { icon: '⛈️' },
+        96: { icon: '⛈️' },
+        99: { icon: '⛈️' }
     };
     
-    return weatherMap[code] || { icon: '☀️', desc: '알 수 없음' };
+    return weatherMap[code]
+        ? { icon: weatherMap[code].icon, desc: descMap[code] || '—' }
+        : { icon: '☀️', desc: descMap[0] || '—' };
 }
 
 // 구름량과 강수량으로 날씨 코드 유추
@@ -223,48 +500,48 @@ function calculateUVIndex(lat, lon, time, cloudCover, weatherCode) {
 // 미세먼지 상태 평가
 function getPMStatus(value, type) {
     if (type === 'pm10') {
-        if (value <= 30) return { text: '좋음', class: 'status-good' };
-        if (value <= 80) return { text: '보통', class: 'status-moderate' };
-        if (value <= 150) return { text: '나쁨', class: 'status-unhealthy' };
-        return { text: '매우나쁨', class: 'status-very-unhealthy' };
+        if (value <= 30) return { text: t('statusGood'), class: 'status-good' };
+        if (value <= 80) return { text: t('statusModerate'), class: 'status-moderate' };
+        if (value <= 150) return { text: t('statusBad'), class: 'status-unhealthy' };
+        return { text: t('statusVeryBad'), class: 'status-very-unhealthy' };
     } else if (type === 'pm25') {
-        if (value <= 15) return { text: '좋음', class: 'status-good' };
-        if (value <= 35) return { text: '보통', class: 'status-moderate' };
-        if (value <= 75) return { text: '나쁨', class: 'status-unhealthy' };
-        return { text: '매우나쁨', class: 'status-very-unhealthy' };
+        if (value <= 15) return { text: t('statusGood'), class: 'status-good' };
+        if (value <= 35) return { text: t('statusModerate'), class: 'status-moderate' };
+        if (value <= 75) return { text: t('statusBad'), class: 'status-unhealthy' };
+        return { text: t('statusVeryBad'), class: 'status-very-unhealthy' };
     }
 }
 
 // 자외선 지수 상태 평가
 function getUVStatus(value) {
-    if (value <= 2) return { text: '낮음', class: 'status-good' };
-    if (value <= 5) return { text: '보통', class: 'status-moderate' };
-    if (value <= 7) return { text: '높음', class: 'status-unhealthy' };
-    if (value <= 10) return { text: '매우높음', class: 'status-very-unhealthy' };
-    return { text: '위험', class: 'status-very-unhealthy' };
+    if (value <= 2) return { text: t('uvLow'), class: 'status-good' };
+    if (value <= 5) return { text: t('uvModerate'), class: 'status-moderate' };
+    if (value <= 7) return { text: t('uvHigh'), class: 'status-unhealthy' };
+    if (value <= 10) return { text: t('uvVeryHigh'), class: 'status-very-unhealthy' };
+    return { text: t('uvExtreme'), class: 'status-very-unhealthy' };
 }
 
 // 외출 지수 메시지 생성
 function getOutdoorTip(temperature, pm25, uvIndex) {
     if (pm25 !== null && pm25 > 35) {
-        return '😷 마스크 권장 (초미세먼지 높음)';
+        return t('tipMask');
     }
     if (temperature !== null && temperature < 5) {
-        return '🧣 겉옷 필수!';
+        return t('tipCoat');
     }
     if (temperature !== null && temperature < 10) {
-        return '🌬️ 목도리 챙기면 좋아요';
+        return t('tipScarf');
     }
     if (uvIndex !== null && uvIndex > 6) {
-        return '🧴 자외선 강함 – 선크림 필수';
+        return t('tipSunscreenHigh');
     }
     if (uvIndex !== null && uvIndex <= 2) {
-        return '🧴 자외선 낮음 – 편한 외출 가능';
+        return t('tipSunscreenLow');
     }
     if (temperature !== null && temperature >= 25) {
-        return '🥤 시원한 음료 챙기세요';
+        return t('tipDrink');
     }
-    return '☀️ 좋은 날씨예요!';
+    return t('tipGood');
 }
 
 // 데이터 표시
@@ -272,9 +549,10 @@ async function displayWeatherData(weatherData, airQualityData, locationName, lat
     // 현재 데이터 저장 (공유 이미지용)
     currentWeatherData = weatherData;
     currentAirQualityData = airQualityData;
-    currentLocationName = locationName;
+    currentLocationNameRaw = locationName;
+    currentLocationName = getLocalizedCityName(locationName);
     // 위치 정보
-    elements.location.textContent = locationName || '위치 확인 중...';
+    elements.location.textContent = currentLocationName || t('locationLoading');
     
     // 기온 (필수 데이터)
     const temperature = weatherData.temperature_2m;
@@ -319,7 +597,7 @@ async function displayWeatherData(weatherData, airQualityData, locationName, lat
         elements.pm10Status.className = `info-status ${pm10Status.class}`;
     } else {
         elements.pm10.querySelector('.value').textContent = '--';
-        elements.pm10Status.textContent = '데이터 없음';
+        elements.pm10Status.textContent = t('noData');
         elements.pm10Status.className = 'info-status';
     }
     
@@ -338,7 +616,7 @@ async function displayWeatherData(weatherData, airQualityData, locationName, lat
         elements.pm25Status.className = `info-status ${pm25Status.class}`;
     } else {
         elements.pm25.querySelector('.value').textContent = '--';
-        elements.pm25Status.textContent = '데이터 없음';
+        elements.pm25Status.textContent = t('noData');
         elements.pm25Status.className = 'info-status';
     }
     
@@ -364,7 +642,7 @@ async function displayWeatherData(weatherData, airQualityData, locationName, lat
         elements.uvStatus.className = `info-status ${uvStatusData.class}`;
     } else {
         elements.uvIndex.textContent = '--';
-        elements.uvStatus.textContent = '데이터 없음';
+        elements.uvStatus.textContent = t('noData');
         elements.uvStatus.className = 'info-status';
     }
     
@@ -395,7 +673,7 @@ async function loadWeatherData() {
         elements.loading.classList.add('hidden');
     } catch (error) {
         elements.loading.classList.add('hidden');
-        alert('날씨 정보를 불러올 수 없습니다. 위치 권한을 확인해주세요.');
+        alert(t('alertFetchFail'));
         console.error('날씨 데이터 로드 실패:', error);
     }
 }
@@ -408,12 +686,18 @@ async function shareWeather() {
     const pm10Text = elements.pm10Status.textContent;
     const pm25Text = elements.pm25Status.textContent;
     
-    const shareText = `지금날씨 🌤️\n\n${locationText}\n온도: ${temp}°C (${desc})\n미세먼지: ${pm10Text}\n초미세먼지: ${pm25Text}\n\n#지금날씨`;
+    const shareText = t('shareText', {
+        location: locationText,
+        temp,
+        desc,
+        pm10: pm10Text,
+        pm25: pm25Text
+    });
     
     if (navigator.share) {
         try {
             await navigator.share({
-                title: '지금날씨',
+                title: t('shareTitle'),
                 text: shareText,
                 url: window.location.href
             });
@@ -431,10 +715,10 @@ async function shareWeather() {
 function fallbackShare(text) {
     if (navigator.clipboard) {
         navigator.clipboard.writeText(text + '\n' + window.location.href).then(() => {
-            alert('클립보드에 복사되었습니다!');
+            alert(t('shareCopied'));
         });
     } else {
-        prompt('아래 텍스트를 복사하세요:', text + '\n' + window.location.href);
+        prompt(t('sharePrompt'), text + '\n' + window.location.href);
     }
 }
 
@@ -469,7 +753,7 @@ async function loadCompareData(currentLat, currentLon) {
                 const pm25Status = pm25 !== null ? getPMStatus(pm25, 'pm25') : null;
                 
                 return {
-                    name: cityName,
+                    name: currentLang === 'en' ? city.nameEn : city.name,
                     temp: Math.round(weather.temperature_2m),
                     pm25Status: pm25Status ? pm25Status.text : '--'
                 };
@@ -510,7 +794,7 @@ function displayCompareData(compareData) {
 // 이미지 카드 생성 및 공유
 async function createAndShareImage() {
     if (!currentWeatherData || !currentLocationName) {
-        alert('날씨 데이터를 먼저 불러와주세요.');
+        alert(t('shareNeedData'));
         return;
     }
     
@@ -535,7 +819,7 @@ async function createAndShareImage() {
         
         // 위치명
         ctx.font = 'bold 48px Arial';
-        ctx.fillText(`${currentLocationName}  |  지금날씨`, 600, 100);
+        ctx.fillText(`${currentLocationName}  |  ${t('title')}`, 600, 100);
         
         // 날씨 아이콘 및 온도
         const temp = Math.round(currentWeatherData.temperature_2m);
@@ -547,7 +831,7 @@ async function createAndShareImage() {
         ctx.fillText(weatherInfo.icon, 600, 250);
         
         ctx.font = 'bold 72px Arial';
-        ctx.fillText(`⛅ ${temp}°C (체감 ${feelsLike}°C)`, 600, 350);
+        ctx.fillText(`⛅ ${temp}°C (${t('feelsLikeShort')} ${feelsLike}°C)`, 600, 350);
         
         // 미세먼지 정보
         let pm10 = null;
@@ -564,11 +848,11 @@ async function createAndShareImage() {
             const uvValue = Math.round(currentWeatherData.uv_index || 0);
             const uvStatusData = getUVStatus(uvValue);
             
-            airInfo = `미세 ${Math.round(pm10)} ${pm10Status.text} · 초미세 ${Math.round(pm25)} ${pm25Status.text} · UV ${uvValue} ${uvStatusData.text}`;
+            airInfo = `${t('pm10Short')} ${Math.round(pm10)} ${pm10Status.text} · ${t('pm25Short')} ${Math.round(pm25)} ${pm25Status.text} · ${t('uvShort')} ${uvValue} ${uvStatusData.text}`;
         } else {
             const uvValue = Math.round(currentWeatherData.uv_index || 0);
             const uvStatusData = getUVStatus(uvValue);
-            airInfo = `UV ${uvValue} ${uvStatusData.text}`;
+            airInfo = `${t('uvShort')} ${uvValue} ${uvStatusData.text}`;
         }
         
         ctx.font = '36px Arial';
@@ -578,10 +862,10 @@ async function createAndShareImage() {
         canvas.toBlob(async (blob) => {
             if (navigator.share && navigator.canShare && navigator.canShare({ files: [new File([blob], 'weather.png', { type: 'image/png' })] })) {
                 try {
-                    const file = new File([blob], '지금날씨.png', { type: 'image/png' });
+                    const file = new File([blob], t('downloadFileName'), { type: 'image/png' });
                     await navigator.share({
-                        title: '지금날씨',
-                        text: `${currentLocationName} 날씨 정보`,
+                        title: t('shareImageTitle'),
+                        text: t('shareImageText', { location: currentLocationName }),
                         files: [file]
                     });
                 } catch (error) {
@@ -595,7 +879,7 @@ async function createAndShareImage() {
         }, 'image/png');
     } catch (error) {
         console.error('이미지 생성 실패:', error);
-        alert('이미지 생성에 실패했습니다.');
+        alert(t('imageCreateFail'));
     }
 }
 
@@ -604,18 +888,21 @@ function downloadImage(blob) {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = '지금날씨.png';
+    a.download = t('downloadFileName');
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-    alert('이미지가 다운로드되었습니다!');
+    alert(t('imageDownloaded'));
 }
 
 // 이벤트 리스너
 elements.refreshBtn.addEventListener('click', loadWeatherData);
 elements.shareBtn.addEventListener('click', shareWeather);
 elements.shareImageBtn.addEventListener('click', createAndShareImage);
+
+// 초기 언어 설정
+initLanguage();
 
 // 페이지 로드 시 날씨 정보 가져오기
 loadWeatherData();

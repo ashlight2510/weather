@@ -98,10 +98,19 @@
   <body>
     <div class="container">
       <header>
-        <h1 class="title">지금날씨</h1>
+        <h1 class="title" data-i18n="title">지금날씨</h1>
+        <div class="lang-switch" role="tablist" aria-label="Language switcher">
+          <button type="button" data-lang="ko" class="active">한국어</button>
+          <button type="button" data-lang="en">English</button>
+        </div>
         <div class="location-info">
           <span id="location">위치 확인 중...</span>
-          <button id="refresh-btn" class="refresh-btn" aria-label="새로고침">
+          <button
+            id="refresh-btn"
+            class="refresh-btn"
+            aria-label="새로고침"
+            data-i18n-aria="refreshAria"
+          >
             🔄
           </button>
         </div>
@@ -119,12 +128,12 @@
 
         <div class="info-grid">
           <div class="weather-card info-card">
-            <div class="info-label">체감온도</div>
+            <div class="info-label" data-i18n="labelFeelsLike">체감온도</div>
             <div class="info-value" id="feels-like">--°C</div>
           </div>
 
           <div class="weather-card info-card">
-            <div class="info-label">미세먼지</div>
+            <div class="info-label" data-i18n="labelPm10">미세먼지</div>
             <div class="info-value" id="pm10">
               <span class="value">--</span>
               <span class="unit">µg/m³</span>
@@ -133,7 +142,7 @@
           </div>
 
           <div class="weather-card info-card">
-            <div class="info-label">초미세먼지</div>
+            <div class="info-label" data-i18n="labelPm25">초미세먼지</div>
             <div class="info-value" id="pm25">
               <span class="value">--</span>
               <span class="unit">µg/m³</span>
@@ -142,7 +151,7 @@
           </div>
 
           <div class="weather-card info-card">
-            <div class="info-label">자외선</div>
+            <div class="info-label" data-i18n="labelUv">자외선</div>
             <div class="info-value" id="uv-index">--</div>
             <div class="info-status" id="uv-status">--</div>
           </div>
@@ -159,15 +168,19 @@
           id="compare-section"
           style="display: none"
         >
-          <div class="compare-title">📍 주변 비교</div>
+          <div class="compare-title" data-i18n="compareTitle">
+            📍 주변 비교
+          </div>
           <div class="compare-list" id="compare-list"></div>
         </div>
       </main>
 
       <div class="share-section">
-        <button id="share-btn" class="share-btn">공유하기 📤</button>
+        <button id="share-btn" class="share-btn" data-i18n="btnShare">
+          공유하기 📤
+        </button>
         <button id="share-image-btn" class="share-btn secondary">
-          이미지로 공유 🖼️
+          <span data-i18n="btnShareImage">이미지로 공유 🖼️</span>
         </button>
       </div>
 
@@ -179,14 +192,14 @@
           © 2025
           <a href="mailto:ashlight2510@gmail.com" class="footer-link"
             >AshLight</a
-          >. All rights reserved.
+          ><span data-i18n="footerRights">. All rights reserved.</span>
         </p>
       </footer>
     </div>
 
     <div id="loading" class="loading">
       <div class="spinner"></div>
-      <p>날씨 정보를 불러오는 중...</p>
+      <p data-i18n="loadingText">날씨 정보를 불러오는 중...</p>
     </div>
 
     <script src="script.js"></script>
@@ -201,7 +214,8 @@
           moreBtn.id = "more-tests-btn";
           moreBtn.type = "button";
           moreBtn.dataset.url = targetUrl;
-          moreBtn.textContent = "더 많은 테스트 해보기";
+          moreBtn.textContent =
+            window.weatherI18n?.t?.("moreTests") || "더 많은 테스트 해보기";
           moreBtn.className = "more-tests-btn";
           moreBtn.addEventListener("click", function () {
             window.open(targetUrl, "_blank", "noopener");
