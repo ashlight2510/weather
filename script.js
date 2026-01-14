@@ -174,7 +174,9 @@ const weatherDescriptions = {
     }
 };
 
-let currentLang = 'ko';
+const defaultLang = 'en';
+const supportedLangs = ['ko', 'en'];
+let currentLang = defaultLang;
 
 function t(key, vars = {}) {
     const table = translations[currentLang] || translations.ko;
@@ -206,7 +208,7 @@ function applyTranslations() {
 }
 
 function setLang(lang, options = {}) {
-    const nextLang = translations[lang] ? lang : 'ko';
+    const nextLang = translations[lang] ? lang : defaultLang;
     currentLang = nextLang;
     document.documentElement.lang = nextLang;
     localStorage.setItem('preferredLang', nextLang);
@@ -235,14 +237,31 @@ function setLang(lang, options = {}) {
     }
 }
 
+function getRegionPreferredLang(fallback = defaultLang) {
+    const intlLocale =
+        typeof Intl === 'object' && typeof Intl.DateTimeFormat === 'function'
+            ? Intl.DateTimeFormat().resolvedOptions().locale
+            : '';
+    const sources = [
+        ...(navigator.languages || []),
+        navigator.language,
+        navigator.userLanguage,
+        intlLocale,
+    ]
+        .filter(Boolean)
+        .map((locale) => locale.toLowerCase());
+    const hasKorean = sources.some((locale) => locale.startsWith('ko'));
+    return hasKorean ? 'ko' : fallback;
+}
+
 function detectLang() {
     const params = new URLSearchParams(window.location.search);
     const paramLang = params.get('lang');
-    if (translations[paramLang]) return paramLang;
+    if (supportedLangs.includes(paramLang)) return paramLang;
     const stored = localStorage.getItem('preferredLang');
-    if (translations[stored]) return stored;
-    const browser = navigator.language?.toLowerCase() || '';
-    return browser.startsWith('en') ? 'en' : 'ko';
+    if (supportedLangs.includes(stored)) return stored;
+    const candidate = getRegionPreferredLang(defaultLang);
+    return supportedLangs.includes(candidate) ? candidate : defaultLang;
 }
 
 function initLanguage() {
